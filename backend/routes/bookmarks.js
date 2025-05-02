@@ -44,3 +44,38 @@ export async function getAllBookmarks(req, res, next) {
     next(error);
   }
 }
+
+// Search Bookmarks by category or url
+export async function searchBookmarks(req, res, next) {
+  try {
+    const { query } = req.query;
+    if (!query) {
+      return res.status(400).json({ error: 'Search query is required' });
+    }
+
+    const results = bookmarks.filter(b => 
+      b.category.toLowerCase().includes(query.toLowerCase()) || 
+      b.url.toLowerCase().includes(query.toLowerCase())
+    );
+
+    res.status(200).json(results);
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Toggle function status of a bookmark
+export async function toogleFavorite(req, res, next){
+  try{
+    const { id } = req.params;
+    const bookmark = bookmarks.find(bookmark => bookmark.id === id);
+
+    if(!bookmark){
+      return res.status(404).json({error : 'bookmark not found'});
+    }
+    bookmark.isFavorite = !bookmark.isFavorite;
+    res.status(200).json(bookmark);
+  }catch(error){
+    next(error);
+  }
+}
