@@ -65,7 +65,7 @@ export async function searchBookmarks(req, res, next) {
 }
 
 // Toggle function status of a bookmark
-export async function toogleFavorite(req, res, next){
+export async function toggleFavorite(req, res, next){
   try{
     const { id } = req.params;
     const bookmark = bookmarks.find(bookmark => bookmark.id === id);

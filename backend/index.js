@@ -6,7 +6,7 @@ import {
   deleteBookmark, 
   getAllBookmarks,
   searchBookmarks,
-  toogleFavorite
+  toggleFavorite
 } from './routes/bookmarks.js'; // importing callback functions for routes
 
 const app = express();
@@ -26,7 +26,7 @@ app.post('/bookmarks', addBookmark);
 app.delete('/bookmarks/:id', deleteBookmark);
 
 // Toggle Favorite Status
-app.patch('/bookmarks/:id/favorite', toogleFavorite);
+app.patch('/bookmarks/:id/favorite', toggleFavorite);
 
 // Search Bookmarks
 app.get('/bookmarks/search', searchBookmarks);

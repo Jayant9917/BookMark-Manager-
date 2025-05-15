@@ -10,6 +10,9 @@ function fetchBookmarks() {
     fetch(API_URL)
         .then(response => response.json())
         .then(bookmarks => {
+            // Clear the list before adding bookmarks
+            const bookmarkList = document.getElementById('bookmark-list');
+            bookmarkList.innerHTML = '';
             bookmarks.forEach(bookmark => addBookmarkToDOM(bookmark));
         })
         .catch(error => console.error('Error fetching bookmarks:', error));
@@ -24,10 +27,10 @@ function addBookmarkToDOM(bookmark) {
     bookmarkItem.setAttribute('data-id', bookmark.id);
 
     const url = document.createElement('span');
-    console.log(bookmark.bookmark?.url)
     url.textContent = `${bookmark.url} (${bookmark.category})`;
 
     const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-btn');
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', () => deleteBookmark(bookmark.id));
 
