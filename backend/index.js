@@ -19,9 +19,6 @@ app.use(express.json());
 // Get all bookmarks
 app.get('/bookmarks', getAllBookmarks);
 
-// Search Bookmarks
-app.get('/bookmarks/search', searchBookmarks);
-
 // Add a new bookmark
 app.post('/bookmarks', addBookmark);
 
@@ -31,6 +28,8 @@ app.delete('/bookmarks/:id', deleteBookmark);
 // Toggle Favorite Status
 app.patch('/bookmarks/:id/favorite', toogleFavorite);
 
+// Search Bookmarks
+app.get('/bookmarks/search', searchBookmarks);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
